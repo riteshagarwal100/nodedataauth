@@ -4,7 +4,11 @@
   "description": "Demo-Sample",
   "main": "server.js",
   "scripts": {
-    "postinstall": "tsd install"
+    "prestart" : "gulp compile-ts",
+    "start": "node server.js",
+    "preinstall": "npm install typings -g",
+    "postinstall": "typings install",
+    "tsd": ""
   },
   "dependencies": {
     "gulp-typescript": "^2.12.1",
