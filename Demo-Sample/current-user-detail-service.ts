@@ -21,12 +21,12 @@ export class CurrentUserDetailService implements UserDetailService {
     loadUserByUsername(userName: string): Q.Promise<any> {
         var usr: any;
         var userDetail: UserDetails;
-        return this.userRepo.findByField("name", userName).then((user) => {
+        return this.userRepo.findByField("username", userName).then((user) => {
             usr = user;
             if (user == null || user == undefined) {
                 throw 'user doesnot exist';
             }
-            userDetail = new User(user.name, user.password, user);
+            userDetail = new User(user.username, user.password, user);
             return userDetail;
         });
     };
@@ -40,7 +40,7 @@ export class CurrentUserDetailService implements UserDetailService {
                 if (user == null || user == undefined) {
                     throw 'user doesnot exist';
                 }
-                userDetail = new User(user.name, user.password, user);
+                userDetail = new User(user.username, user.password, user);
                 return userDetail;
             });
     };
@@ -52,7 +52,7 @@ export class CurrentUserDetailService implements UserDetailService {
                 if (user == null || user == undefined) {
                     throw 'user doesnot exist';
                 }
-                userDetail = new User(user.name, user.password, user);
+                userDetail = new User(user.username, user.password, user);
                 return userDetail;
             });
     };
@@ -65,7 +65,7 @@ export class CurrentUserDetailService implements UserDetailService {
                 if (user == null || user == undefined) {
                     throw 'user doesnot exist';
                 }
-                userDetail = new User(user.name, user.password, user);
+                userDetail = new User(user.username, user.password, user);
                 return userDetail;
             });
     };
@@ -78,7 +78,7 @@ export class CurrentUserDetailService implements UserDetailService {
             if (user == null || user == undefined) {
                 throw 'user doesnot exist';
             }
-            userDetail = new User(user.name, user.password, user);
+            userDetail = new User(user.username, user.password, user);
             return userDetail;
         });
     }
@@ -90,7 +90,7 @@ export class CurrentUserDetailService implements UserDetailService {
     getNewUser(req, res) {
         var userDetail: UserDetails;
         var user = req.body;
-        this.userRepo.findByField("name", user.name).then((foundUser) => {
+        this.userRepo.findByField("username", user.username).then((foundUser) => {
             if (foundUser == null || foundUser == undefined || !foundUser._id) {
                 user.password = bcryptNodejs.hashSync(user.password, bcryptNodejs.genSaltSync(8), null);
                 this.createNewUser(user).then((finalUser) => {

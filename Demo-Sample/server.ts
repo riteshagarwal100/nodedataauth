@@ -19,7 +19,6 @@ data.generateSchema();
 
 require('reflect-metadata/reflect');
 var bodyParser = require("body-parser");
-var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
 process.env.APP_ROOT = "hello";
 
 var app = express();
@@ -36,9 +35,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-
-app.use(passport.initialize());
-app.use(passport.session());
 app.use("/", router);
 
 var server = http.createServer(app);
